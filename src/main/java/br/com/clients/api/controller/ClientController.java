@@ -1,9 +1,6 @@
 package br.com.clients.api.controller;
 
-import br.com.clients.api.client.Client;
-import br.com.clients.api.client.ClientRepository;
-import br.com.clients.api.client.DataClient;
-import br.com.clients.api.client.DataGetClient;
+import br.com.clients.api.client.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +17,21 @@ public class ClientController {
     private ClientRepository repository;
     @PostMapping
     @Transactional
-    public void registrateClient(@RequestBody @Valid  DataClient client) {
+    public void registrateClient(@RequestBody @Valid  DataClient client) { //CREATE
         System.out.println("Success");
         repository.save(new Client(client));
     }
     @GetMapping
-    public Page<DataGetClient> getClients(@PageableDefault(size=10, page=0, sort="name") Pageable paginator) {
+    public Page<DataGetClient> getClients(@PageableDefault(size=10, page=0, sort="name") Pageable paginator) { //READ
         return repository.findAll(paginator).map(DataGetClient::new);
     }
+
+    @PutMapping
+    @Transactional
+    public void updateClient(@RequestBody @Valid NewClientData data) {
+        var client = repository.getReferenceById(data.id());
+        client.updateInfo(data);
+    }
+
+
 }

@@ -22,5 +22,23 @@ public class Adress {
         this.city = adress.zip();
         this.country = adress.country();
     }
+
+    public void updateAdress(DataAdress adress) {
+        if (adress.street() != null) {
+            this.street = adress.street();
+        }
+        if (adress.zip() != null) {
+            this.zip = adress.zip();
+        }
+        if (adress.state() != null) {
+            this.state = adress.state();
+        }
+        if (adress.city() != null) {
+            this.city = adress.city();
+        }
+        if (adress.country() != null) {
+            this.country = adress.country();
+        }
+    }
 }
 

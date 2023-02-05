@@ -31,4 +31,15 @@ public class Client {
         this.adress = new Adress(client.adress());
     }
 
+    public void updateInfo(NewClientData data) {
+        if (data.email() != null) {
+            this.email = data.email();
+        }
+        if (data.number() != null) {
+            this.number = data.number();
+        }
+        if (data.adress() != null) {
+            this.adress.updateAdress(data.adress());
+        }
+    }
 }
