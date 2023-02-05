@@ -23,14 +23,21 @@ public class ClientController {
     }
     @GetMapping
     public Page<DataGetClient> getClients(@PageableDefault(size=10, page=0, sort="name") Pageable paginator) { //READ
-        return repository.findAll(paginator).map(DataGetClient::new);
+        return repository.findAllByActiveTrue(paginator).map(DataGetClient::new); //find only active, logic delete
     }
 
     @PutMapping
     @Transactional
-    public void updateClient(@RequestBody @Valid NewClientData data) {
+    public void updateClient(@RequestBody @Valid NewClientData data) { //UPDATE
         var client = repository.getReferenceById(data.id());
         client.updateInfo(data);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void deleteClient(@PathVariable Long id) { //DELETE
+        var client = repository.getReferenceById(id);
+        client.delete();
     }
 
 

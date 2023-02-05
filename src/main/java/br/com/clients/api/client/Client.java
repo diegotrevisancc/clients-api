@@ -22,6 +22,7 @@ public class Client {
     private String email;
     @Embedded
     private Adress adress;
+    private boolean active;
 
     public Client(DataClient client) {
         this.name = client.name();
@@ -29,6 +30,7 @@ public class Client {
         this.number = client.number();
         this.email = client.email();
         this.adress = new Adress(client.adress());
+        this.active = true;
     }
 
     public void updateInfo(NewClientData data) {
@@ -41,5 +43,8 @@ public class Client {
         if (data.adress() != null) {
             this.adress.updateAdress(data.adress());
         }
+    }
+    public void delete() {
+        this.active = false;
     }
 }
