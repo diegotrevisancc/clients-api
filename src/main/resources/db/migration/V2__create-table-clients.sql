@@ -1,0 +1,1 @@
+alter table clients add paymentMethod varchar(20) not null;

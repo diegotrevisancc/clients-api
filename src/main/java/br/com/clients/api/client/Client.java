@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
+@Table(name="clients")
+@Entity(name="client")
 @Embeddable
 @Getter //lombok autogenerates getters
 @NoArgsConstructor //lombok
