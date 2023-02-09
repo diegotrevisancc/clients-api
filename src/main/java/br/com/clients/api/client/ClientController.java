@@ -52,5 +52,9 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity getFullClientData(@PathVariable Long id) {
+        var client = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DataClientDetails(client));
+    }
 }
